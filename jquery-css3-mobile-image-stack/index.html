@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>一封情书</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<style>
+	@import url(http://fonts.useso.com/css?family=Raleway:200,500,700,800);
+	@-webkit-keyframes animation{from{opacity:0; -webkit-transform:scale(1.2) rotateX(45deg);transform:scale(1.2) rotateX(45deg);} to{ }}
+
+	@-webkit-keyframes animation2{from{opacity:0; -webkit-transform:scale(1.2) rotateX(45deg);transform:scale(1.2) rotateX(45deg);} to{ }}
+	body {
+	}
+	.slider div p{color:#1c1c1c;position:absolute;bottom:-70px; font-family:Raleway; font-size:16px;}
+	.slider{
+	    -webkit-animation:animation ease 1s;animation-delay:.8s;animation-fill-mode:backwards;
+	    margin: 0 auto;
+	    height:360px;
+	    width:240px;
+	    padding:40px;
+	    top:100px;
+	    perspective:1000px;
+	    transition:ease-in-out .2s;
+	    /*-webkit-transform:rotateX(45deg);
+	    -webkit-transform-style:preserve-3d;
+	    position:absolute;*/
+	}
+	/*.slider:active{ -webkit-transform:rotateZ(10deg);}*/
+	.slide img { text-align:center;width:100%; height:100%; -webkit-user-drag:none;user-drag:none;-moz-user-drag:none; border-radius:2px; }
+	.slide{
+	    -webkit-user-select:none;
+	    user-select:none;
+	    -moz-user-select:none;
+	    position:absolute;
+	    height:280px;
+	    width:240px;
+	    box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.3);
+	    background:#fcfcfc;
+	    -webkit-transform-style:preserve-3d;
+	    transform-style:preserve-3d;
+	    -moz-transform-style:preserve-3d;
+	    text-align:center;
+	    /*overflow:hidden;*/
+	    border:12px white solid;
+	    box-sizing:border-box;
+	    border-bottom:55px white solid;
+	    border-radius:5px; 
+	}
+	.transition {
+	    -webkit-transition: cubic-bezier(0,1.95,.49,.73) .4s ;
+	    -moz-transition: cubic-bezier(0,1.95,.49,.73) .4s ;
+	    transition: cubic-bezier(0,1.95,.49,.73) .4s ;
+	}
+	</style>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="htmleaf-container">
+		
+		<div class="htmleaf-content">
+			<div class="slider">
+				<div class="slide" id='1' ><img src="imgs/1.jpg" /><p>But my wasted heard will love you</p></div>
+		        <div class="slide" id='2'><img src="imgs/7.jpg" /><p>To me you are perfect， I don't deserve you</p></div>
+		        <div class="slide" id='3'><img src="imgs/6.jpg" /><p>Just because is in Magpie Festival I tell the turth</p></div>
+		        <div class="slide" id='4'><img src="imgs/5.jpg" /><p>Without hope and agenda</p></div>
+		        <div class="slide" id='5'><img style="width:68%" src="imgs/3.jpg" /><p>But for now let me say</p></div>
+		        <div class="slide" id='6'><img src="imgs/4.jpg" /><p> I will stay with u</p></div>
+		        <div class="slide" id='7'><img style="height:80%" src="imgs/9.png" /><p>With any luck by next year </p></div>
+		    </div>
+			<div id='text' style="width:80%;height: 150px;margin-left:10%;text-align: left;">
+				
+			</div>
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=17990609&auto=1&height=66"></iframe>
+		</div>
+		<div style="text-align:center;clear:both">
+<!-- <script src="./gg_bd_ad_720x90.js" type="text/javascript"></script>
+<script src="./follow.js" type="text/javascript"></script> -->
+</div>
+	</div>
+	
+	<script src='js/stopExecutionOnTimeout.js?t=1'></script>
+	<script>
+	window.addEventListener('load', onWndLoad, false);
+	function onWndLoad() {
+	    var slider = document.querySelector('.slider');
+	    var sliders = slider.children;
+	    var initX = null;
+	    var transX = 0;
+	    var rotZ = 0;
+	    var transY = 0;
+	    var curSlide = null;
+	    var Z_DIS = 50;
+	    var Y_DIS = 10;
+	    var TRANS_DUR = 0.4;
+	    var images = document.querySelectorAll('img');
+	    for (var i = 0; i < images.length; i++) {
+	        if (window.CP.shouldStopExecution(1)) {
+	            break;
+	        }
+	        images[i].onmousemove = function (e) {
+	            e.preventDefault();
+	        };
+	        images[i].ondragstart = function (e) {
+	            return false;
+	        }
+	    }
+	    window.CP.exitedLoop(1);
+	    function init() {
+	        var z = 0, y = 0;
+	        for (var i = sliders.length - 1; i >= 0; i--) {
+	            if (window.CP.shouldStopExecution(2)) {
+	                break;
+	            }
+	            sliders[i].style.transform = 'translateZ(' + z + 'px) translateY(' + y + 'px)';
+	            z -= Z_DIS;
+	            y += Y_DIS;
+	        }
+	        window.CP.exitedLoop(2);
+	        attachEvents(sliders[sliders.length - 1]);
+	    }
+	    function attachEvents(elem) {
+	    	var text = document.getElementById('text')
+	    	console.log(elem.id)
+	    	switch (+elem.id)
+	    	{
+	    		case 7:
+	    		text.innerHTML = '你说牛郎织女隔一年见一次 那一天他们在说什么？ 我也在想我们都快一个月没有说话 见面时候 除了瞪着眼睛 我似乎择出来别的话 除了我想你'
+	    		break;
+	    		case 6:
+	    		text.innerHTML = '还记得我们第一次去南京 不体贴的我 带着你到处溜达 却找不到想去的地方 一路上我说了我一切我想说的情话 我得到了超乎我想象的幸福 我愿意用我的下半辈子让你和我一样幸福'
+	    		break;
+	    		case 5:
+	    		text.innerHTML = '你在常熟看别人婚礼 你在说你同学婚礼很赞 我就想以后我们结婚是什么样子 中式的？ 西式的？ 都成 你什么样子我觉得很美 后来 我一直磨磨唧唧 碎碎叨叨问你什么时候 咱们什么时候结婚？  如果可以 这辈子我只想你和我一起 '
+	    		break;
+	    		case 4:
+	    		text.innerHTML = '泰晤士小镇可真是小 路绕了又绕还是不想走 你笑我衰神附体踩到便便 我看到你遇到宠物就惊慌失措的样子就忍不住笑起来 我和你说过 咱两以后结婚 咱家不养宠物 我唯一外遇的对象就是猫猫狗狗 '
+	    		break;
+	    		case 3:
+	    		text.innerHTML = '也就是晚上的西湖才觉得夏天的杭州不是那么乏 晚上睡得模糊 听到枕边的你说道：除了傻了点 其他都还不错 这是我听到的最中肯的评价也是最美的情话 感激你不嫌弃我愚钝 我许诺不会让你受到欺负 还是抱歉是我的自私和愚蠢伤害了你'
+	    		break;
+	    		case 2:
+	    		text.innerHTML = '我妈说 那么多女朋友的照片 都没有一张合影 你不让我拍照 唯一偷拍的照片还是你扭着脸 每次你都说我越来越丑 我心里却知道 我是越来越离不开你 可能你和我在一起会更辛苦 想着我怎么样会更过得舒服 之前作为男友实在是太失职了'
+	    		break;
+	    		case 1:
+	    		text.innerHTML = '这张沙滩的照片我已经秀给我无数好友看过 多希望下次给你拍照片的人是我 请原谅 我之前的傻逼 以后不管走到什么地方 我都要跟着你一起 '
+	    		break;
+	    	}
+	        curSlide = elem;
+	        curSlide.addEventListener('mousedown', slideMouseDown, false);
+	        curSlide.addEventListener('touchstart', slideMouseDown, false);
+	    }
+	    init();
+	    function slideMouseDown(e) {
+	        if (e.touches) {
+	            initX = e.touches[0].clientX;
+	        } else {
+	            initX = e.pageX;
+	        }
+	        document.addEventListener('mousemove', slideMouseMove, false);
+	        document.addEventListener('touchmove', slideMouseMove, false);
+	        document.addEventListener('mouseup', slideMouseUp, false);
+	        document.addEventListener('touchend', slideMouseUp, false);
+	    }
+	    var prevSlide = null;
+	    function slideMouseMove(e) {
+	        var mouseX;
+	        if (e.touches) {
+	            mouseX = e.touches[0].clientX;
+	        } else {
+	            mouseX = e.pageX;
+	        }
+	        transX += mouseX - initX;
+	        rotZ = transX / 20;
+	        transY = -Math.abs(transX / 15);
+	        curSlide.style.transition = 'none';
+	        curSlide.style.webkitTransform = 'translateX(' + transX + 'px)' + ' rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+	        curSlide.style.transform = 'translateX(' + transX + 'px)' + ' rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+	        var j = 1;
+	        for (var i = sliders.length - 2; i >= 0; i--) {
+	            if (window.CP.shouldStopExecution(3)) {
+	                break;
+	            }
+	            sliders[i].style.webkitTransform = 'translateX(' + transX / (2 * j) + 'px)' + ' rotateZ(' + rotZ / (2 * j) + 'deg)' + ' translateY(' + Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+	            sliders[i].style.transform = 'translateX(' + transX / (2 * j) + 'px)' + ' rotateZ(' + rotZ / (2 * j) + 'deg)' + ' translateY(' + Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+	            sliders[i].style.transition = 'none';
+	            j++;
+	        }
+	        window.CP.exitedLoop(3);
+	        initX = mouseX;
+	        e.preventDefault();
+	        if (Math.abs(transX) >= curSlide.offsetWidth - 30) {
+	            document.removeEventListener('mousemove', slideMouseMove, false);
+	            document.removeEventListener('touchmove', slideMouseMove, false);
+	            curSlide.style.transition = 'ease 0.2s';
+	            curSlide.style.opacity = 0;
+	            prevSlide = curSlide;
+	            attachEvents(sliders[sliders.length - 2]);
+	            slideMouseUp();
+	            setTimeout(function () {
+	                slider.insertBefore(prevSlide, slider.firstChild);
+	                prevSlide.style.transition = 'none';
+	                prevSlide.style.opacity = '1';
+	                slideMouseUp();
+	            }, 201);
+	            return;
+	        }
+	    }
+	    function slideMouseUp() {
+	        transX = 0;
+	        rotZ = 0;
+	        transY = 0;
+	        curSlide.style.transition = 'cubic-bezier(0,1.95,.49,.73) ' + TRANS_DUR + 's';
+	        curSlide.style.webkitTransform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+	        curSlide.style.transform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+	        var j = 1;
+	        for (var i = sliders.length - 2; i >= 0; i--) {
+	            sliders[i].style.transition = 'cubic-bezier(0,1.95,.49,.73) ' + TRANS_DUR / (j + 0.9) + 's';
+	            sliders[i].style.webkitTransform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+	            sliders[i].style.transform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+	            j++;
+	        }
+	        document.removeEventListener('mousemove', slideMouseMove, false);
+	        document.removeEventListener('touchmove', slideMouseMove, false);
+	    }
+	}
+	</script>
+</body>
+</html>
